@@ -344,7 +344,8 @@ pub fn BookingCreationPopup(
             action=creation_action
             loading_message="Booking in Progress"
             modal=move |res| match res {
-                Ok(_) => {
+                Ok(tx) => {
+                    let booking_id = format!("{}-{}", tx.car_id, tx.booking_id);
                     view! {
                         <div>
                         <div class="flex items-center justify-center  bg-gray-100">
@@ -366,7 +367,7 @@ pub fn BookingCreationPopup(
                 
                 // Booking Reference
                                         <div class="bg-gray-200 py-3 px-4 rounded-lg inline-block text-lg font-medium text-gray-700">
-                                        "Booking Ref. FRA-BE-19283102-MHAKSA-DELIVERY-ORDER"
+                                        Booking Ref. {booking_id}
                                 </div>
                             </div>
                         </div>

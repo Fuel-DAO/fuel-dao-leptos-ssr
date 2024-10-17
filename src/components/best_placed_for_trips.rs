@@ -5,16 +5,12 @@ use leptos_use::use_media_query;
 #[component]
 pub fn BestPlacedForTrips() -> impl IntoView {
     let items = vec![
-        ("Villa Avenil", "/public/img/trips.svg", "$200 "),
-        ("Villa Edo", "/public/img/trips.svg", "$180"),
-        ("Villa Raffa", "/public/img/trips.svg", "$250 "),
-        ("Villa Peony", "/public/img/trips.svg", "$300 "),
-        ("Villa Amara", "/public/img/trips.svg", "$220 "),
-        // ("Villa Avenil", "/public/img/2.jpg", "$200 / night"),
-        ("Villa Edo", "/public/img/trips.svg", "$180 "),
-        ("Villa Raffa", "/public/img/trips.svg", "$250"),
-        ("Villa Peony", "/public/img/trips.svg", "$300 "),
-        ("Villa Amara", "/public/img/trips.svg", "$220"),
+        ("Goa", "/public/img/nearby/Goa1.jpg", ""),
+        ("Chikmagalur", "/public/img/nearby/Chikmagalur.jpg", ""),
+        ("Coorg", "/public/img/nearby/Coorg.jpg", ""),
+        ("Wayanad", "/public/img/nearby/Wayanad.jpeg", ""),
+        ("Hyderabad", "/public/img/nearby/Hyderabad.jpeg", ""),
+        
     ];
 
     let length = items.len();
@@ -117,9 +113,9 @@ pub fn BestPlacedForTrips() -> impl IntoView {
                                             class=format!(
                                                 "object-cover rounded-lg shadow-lg {}",
                                                 if is_first || is_last {
-                                                    " h-32  lg:h-[65%]"
+                                                    " h-32 w-40 lg:h-[65%]"
                                                 } else {
-                                                    "h-40 lg:h-auto"
+                                                    "h-40 w-40 lg:h-auto"
                                                 },
                                             )
                                         />
@@ -130,10 +126,10 @@ pub fn BestPlacedForTrips() -> impl IntoView {
 
                                             <div class="flex justify-between w-full">
                                                 <h3 class="text-lg font-bold text-center">{items[i].0}</h3>
-                                                <div class="flex flex-col items-end">
-                                                    <p class="font-bold text-green-500">{items[i].2}</p>
-                                                    <p class="text-sm text-gray-500">{"per month"}</p>
-                                                </div>
+                                                // <div class="flex flex-col items-end">
+                                                //     <p class="font-bold text-green-500">{items[i].2}</p>
+                                                //     <p class="text-sm text-gray-500">{"per month"}</p>
+                                                // </div>
                                             </div>
                                         </div>
                                     </div>
