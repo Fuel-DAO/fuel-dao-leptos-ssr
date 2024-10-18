@@ -1,7 +1,7 @@
 use leptos::*;
 
 use crate::{
-    canister::backend::{ CarStatus, CustomerDetials, RentalTransaction}, components::{ActionTrackerPopup, FooterSection}, state::{
+    base_route::user_principal_jwk, canister::backend::CarStatus, components::{ActionTrackerPopup, FooterSection}, models::CreateTransactionRequest, state::{
         canisters::authenticated_canisters,
         checkout_state::{CheckoutState, CheckoutUser},
     }, utils::{
@@ -61,37 +61,31 @@ pub fn CheckoutPageInner() -> impl IntoView {
             
             let create_action = create_action( move |&()| {
                 {
-                let value = cans_res.clone();
                 async move {
 
-                    user.user.get_untracked().validate_details()?;
-                    // if !user.user.get_untracked().validate_details() {
-                    //     return Err("All fields are required".into());
-                    // }
+                    let principal_jwk = user_principal_jwk().0.get_untracked().map(|f| f).ok_or_else(|| "Failed to fetch delegated identity")?;
 
-                    let cans = value.wait_untracked().await.unwrap();
-                        let cans = cans.canisters().unwrap();
-                        let backend = cans
-                            .backend()
-                            .await;
-                        let reserve  = backend.reserve_car(car.id, checkout.start_time.get_untracked().unwrap(), checkout.end_time.get_untracked().unwrap(), CustomerDetials {
-                            age:   user.user.get_untracked().age.unwrap(), 
-                            pan :  user.user.get_untracked().pan.unwrap(), 
-                            aadhar:  user.user.get_untracked().aadhar.unwrap(), 
-                            mobile_number:  user.user.get_untracked().mobile_number.unwrap(),
-                            name:  user.user.get_untracked().name.unwrap(),
-                            email:  user.user.get_untracked().email.unwrap(), 
-                            country_code:  user.user.get_untracked().country_code.unwrap()
-                        }).await;
+                    let principal_jwk = principal_jwk.to_string();
 
-                        match reserve {
-                            Ok(result1)  => {
-                                    match result1 {
-                                        crate::canister::backend::Result2::Ok(rental_transaction) => Ok(rental_transaction),
-                                        crate::canister::backend::Result2::Err(e) => Err(e),
-                                    }
+                    let request = CreateTransactionRequest { principal_jwk, age:   user.user.get_untracked().age.unwrap(), 
+                        pan :  user.user.get_untracked().pan.unwrap(), 
+                        aadhar:  user.user.get_untracked().aadhar.unwrap().parse::<u64>().map_err(|_| "Invalid aadhar")?, 
+                        mobile_number:  user.user.get_untracked().mobile_number.unwrap(),
+                        name:  user.user.get_untracked().name.unwrap(),
+                        email_address:  user.user.get_untracked().email.unwrap(), 
+                        car_id: car.id,
+                        start_time: checkout.start_time.get_untracked().unwrap(), end_time: checkout.end_time.get_untracked().unwrap(),
+                        country_code:  user.user.get_untracked().country_code.unwrap().parse::<u16>().map_err(|_|"Invalida country code")? };
+
+
+                        match request.reserve_car().await {
+                            Ok(booking_id)  => {
+                                 Ok(booking_id)
                             }  , 
-                            Err(e) => Err(e.to_string())                           
+                            Err(e) => {
+                                logging::log!("{:?}", e);
+                                Err(e.to_string()) 
+                            }                          
                         }
 
 
@@ -206,7 +200,7 @@ pub fn CheckoutPageInner() -> impl IntoView {
                                 <button disabled=create_diabled  on:click=move |_| create_action.dispatch(()) class="w-full bg-green-500 text-white py-3 rounded-lg font-bold disabled:text-neutral-500 disabled:bg-primary-500/30">
                                     "Rent Now"
                                 </button>
-                                <BookingCreationPopup creation_action=create_action/>
+                                <BookingCreationPopup creation_action=create_action car_id=car.id/>
                                 </Show>
                             </div>
 
@@ -336,7 +330,8 @@ pub fn CheckoutPageInner() -> impl IntoView {
 
 #[component]
 pub fn BookingCreationPopup(
-    creation_action: Action<(), Result<RentalTransaction, String>>,
+    creation_action: Action<(), Result<u64, String>>,
+    car_id: u64,
 ) -> impl IntoView {
     let close_popup = create_rw_signal(false);
     view! {
@@ -344,7 +339,8 @@ pub fn BookingCreationPopup(
             action=creation_action
             loading_message="Booking in Progress"
             modal=move |res| match res {
-                Ok(_) => {
+                Ok(tx) => {
+                    let booking_id = format!("{}-{}", car_id, tx);
                     view! {
                         <div>
                         <div class="flex items-center justify-center  bg-gray-100">
@@ -366,7 +362,7 @@ pub fn BookingCreationPopup(
                 
                 // Booking Reference
                                         <div class="bg-gray-200 py-3 px-4 rounded-lg inline-block text-lg font-medium text-gray-700">
-                                        "Booking Ref. FRA-BE-19283102-MHAKSA-DELIVERY-ORDER"
+                                        Booking Ref. {booking_id}
                                 </div>
                             </div>
                         </div>

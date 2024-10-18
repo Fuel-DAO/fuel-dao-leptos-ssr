@@ -40,6 +40,8 @@ http = "1.1.0"
 serde_json = "1.0.110"
 # dotenv = "0.15.0"
 dotenv_codegen = "0.15.0"
+reqwest = "0.12.8"
+
 
 [build-dependencies]
 serde = { version = "1.0", features = ["derive"] }

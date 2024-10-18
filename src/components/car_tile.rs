@@ -4,7 +4,7 @@ use leptos_router::use_navigate;
 
 use crate::{
     canister::backend::{Car, CarDetails, CarStatus},
-    components::{ FooterSection, HeroSectionNotHome, HomeBanner, PopupOverlay, SkeletonCards},
+    components::{ FooterSection, HeroSectionNotHome,  PopupOverlay, SkeletonCards},
     state::{
         canisters::{authenticated_canisters, CanistersAuthWire},
         checkout_state::CheckoutState,
@@ -216,7 +216,7 @@ pub fn CarCard(car: Car) -> impl IntoView {
                             </div>
                         },
                         _ => view! {
-                            <div class="px-3 py-1 rounded text-white rounded text-sm" style="background-color:gray">
+                            <div class="px-3 py-1 rounded text-white  text-sm" style="background-color:gray">
                                 Not Available
                             </div>
                         }

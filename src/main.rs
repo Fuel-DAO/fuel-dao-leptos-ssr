@@ -7,6 +7,7 @@ mod canister;
 mod components;
 mod error_template;
 mod base_route;
+mod models;
 use app::*;
 use leptos::*;
 

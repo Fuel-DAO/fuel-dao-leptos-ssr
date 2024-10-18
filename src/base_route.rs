@@ -2,7 +2,6 @@ use candid::Principal;
 use ic_agent::identity::Secp256k1Identity;
 use ic_agent::Identity;
 use k256::elliptic_curve::rand_core::OsRng;
-use k256::elliptic_curve::zeroize::Zeroize;
 use k256::elliptic_curve::{JwkEcKey, SecretKey};
 use k256::Secp256k1;
 use leptos::*;
@@ -152,7 +151,7 @@ pub async fn extract_identity() -> Result<Option<DelegatedIdentityWire>, ()> {
 
 pub async fn try_extract_identity(
 ) -> Result<Option<k256::SecretKey>, ()> {
-    let Some(principal) = extract_principal_from_local_storage()? else {
+    let Some(_principal) = extract_principal_from_local_storage()? else {
         return Ok(None);
     };
     fetch_identity_from_kv()
