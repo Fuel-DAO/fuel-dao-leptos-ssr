@@ -22,5 +22,5 @@
         "comments": "on",
         "strings": true
     },
-    "css.validate": false
+    "css.validate": true
 }
