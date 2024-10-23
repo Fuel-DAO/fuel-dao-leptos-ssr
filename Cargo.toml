@@ -1,17 +1,74 @@
-[workspace]
-members = ["ssr"]
-resolver = "2"
+[package]
+name = "fuel-dao-frontend"
+version = "0.1.0"
+edition = "2021"
 
-[workspace.dependencies]
+[dependencies]
+leptos = { version = "0.6", features = ["nightly", "csr"] }
+leptos_meta = { version = "0.6", features = ["nightly", "csr"] }
+leptos_router = { version = "0.6", features = ["nightly", "csr"] }
+wasm-bindgen = "=0.2.93"
+leptos_icons = "0.3.1"
+icondata_core = "0.1.0"
+icondata = "0.4.0"
+ic-agent = { version = "0.38.2", features = ["wasm-bindgen"]}
+ic-base-types = { git = "https://github.com/dfinity/ic", rev = "tags/release-2024-05-29_23-02-base" }
+serde-wasm-bindgen = "0.6.5"
+futures = "0.3.30"
+leptos-use = "0.12.0"
+codee = { version = "0.1.2", features = ["json_serde"] }
+uts2ts = "0.4.1"
+log = "0.4.22"
+simple_logger = "5.0.0"
+hex = "0.4.3"
+convert_case = "0.6.0"
+chrono = "0.4.38"
+console_log = { version = "1" }
+console_error_panic_hook = { version = "0.1" }
+tokio = { version = "1.40.0" , features = [ 
+    "time",] }
 serde = { version = "1.0", features = ["derive"] }
 candid = "0.10.3"
 serde_bytes = "0.11.14"
 web-time = "1.0.0"
+k256 = { version = "0.13.4", default-features = false, features = [
+    "std",
+    "jwk",
+] }
+thiserror = "1.0.64"
+http = "1.1.0"
+serde_json = "1.0.110"
+# dotenv = "0.15.0"
+dotenv_codegen = "0.15.0"
+reqwest = "0.12.8"
 
-# Defines a size-optimized profile for the WASM bundle in release mode
+
+[build-dependencies]
+serde = { version = "1.0", features = ["derive"] }
+candid_parser = "0.1.1"
+serde_json = "1.0.110"
+convert_case = "0.6.0"
+# dotenv = "0.15.0"
+dotenv_codegen = "0.15.0"
+anyhow = "1.0.86"
+
 [profile.wasm-release]
 inherits = "release"
 opt-level = 'z'
 lto = true
 codegen-units = 1
 panic = "abort"
+
+
+[package.metadata.leptos]
+# The name used by wasm-bindgen/cargo-leptos for the JS/WASM bundle. Defaults to the crate name
+output-name = "fuel-dao-frontend"
+
+# [Optional] The source CSS file. If it ends with .sass or .scss then it will be compiled by dart-sass into CSS. The CSS is optimized by Lightning CSS before being written to <site-root>/<site-pkg>/app.css
+tailwind-input-file = "style/tailwind.css"
+tailwind-config-file = "tailwind.config.js"
+# Assets source dir. All files found here will be copied and synchronized to site-root.
+# The assets-dir cannot have a sub directory with the same name/path as site-pkg-dir.
+#
+# Optional. Env: LEPTOS_ASSETS_DIR.
+assets-dir = "public"

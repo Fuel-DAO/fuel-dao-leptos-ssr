@@ -1,0 +1,7 @@
+Once canisters are deployed update canister id in canister_ids.json
+
+Once offchain service is deployed update OFFCHAIN_URL inside src/consts/remote.rs
+
+In case of CORS error, locally use:
+
+open -na "Google Chrome" --args --disable-web-security --user-data-dir="/tmp/chrome_dev"
