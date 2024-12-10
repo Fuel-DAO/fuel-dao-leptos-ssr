@@ -38,14 +38,14 @@ pub fn HeroSection(
 
             // Navigation Bar
             <div class="flex relative flex-row hidden md:flex">
-                <img src="/public/img/fueldao.svg" alt="FuelDAO Logo" class="h-10 p-2 basis-1/4" />
+                <img src="/public/img/app.svg" alt="FuelDAO Logo" class="h-10 p-2 basis-1/4" />
                 <img src="/public/img/header.svg"  class="basis-1/2 hidden  md:flex" />
                 <img src="/public/icons/user.svg"  class="hidden" />
             </div>
             <div class="flex absolute inset-x-0 top-0 z-20 justify-center items-center md:hidden">
                 <div class="relative w-full md:bg-white max-w-[756.75px] md:rounded-b-[75px]">
                     <div class="flex justify-between items-center md:hidden">
-                        <img src="/public/img/fueldao.svg" alt="FuelDAO Logo" class="h-10 p-2 basis-1/4" />
+                        <img src="/public/img/app.svg" alt="FuelDAO Logo" class="h-10 p-2 basis-1/4" />
 
                         <button
                             id="menu-btn"

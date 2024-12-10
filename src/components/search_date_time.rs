@@ -24,7 +24,7 @@ pub fn HeroSectionNotHome(
         >
             // Navigation Bar
             <div class="flex  flex-row justify-between p-2 ">
-                <a href="/"> <img src="/public/img/fueldao.svg" alt="FuelDAO Logo" class="h-10 p-2 basis-1/4" /></a>
+                <a href="/"> <img src="/public/img/app.svg" alt="FuelDAO Logo" class="h-10 p-2 basis-1/4" /></a>
                 <img src="/public/icons/user.svg"  class="hidden" />
             </div>
             <div class="flex absolute inset-x-0 top-0 z-20 justify-center items-center md:hidden">
