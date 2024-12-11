@@ -8,6 +8,10 @@ minify = "on_release" # can be one of: never, on_release, always
 source = "public"
 destination = "public"
 
+[[copy-dir]]
+source = "static"
+destination = "static"
+
 [[hooks]]
 stage = "pre_build"
 command = "sh"

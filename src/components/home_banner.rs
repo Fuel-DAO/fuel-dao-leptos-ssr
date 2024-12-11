@@ -21,7 +21,7 @@ pub fn HomeBanner(is_root: bool) -> impl IntoView {
                     // Logo image (1/4 width)
                     <div class="w-1/4 flex justify-center ">
                         <a href="/">
-                            <img src="/public/img/fueldao.svg" alt="App Logo" class="h-12" />
+                            <img src="/public/img/app.svg" alt="App Logo" class="h-12" />
                         </a>
                     </div>
 

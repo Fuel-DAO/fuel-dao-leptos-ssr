@@ -37,7 +37,7 @@ pub fn FooterSection() -> impl IntoView {
                 // Right section: Logo and Links
                 <div class="w-full md:w-1/2 flex flex-col items-center md:items-end space-y-8">
                     // Logo
-                    <img src="/public/img/fueldao.svg" alt="Fuel DAO logo" class="h-12"/>
+                    <img src="/public/img/app.svg" alt="Fuel DAO logo" class="h-12"/>
 
                     // Links
                     <div class="flex flex-col space-y-2 text-green-400 text-center md:text-right">
@@ -113,7 +113,7 @@ pub fn Footer() -> impl IntoView {
                 <div class="lg:absolute border-l border-[#4E5154] pt-4 lg:pt-0 lg:top-[160px] lg:left-[918.12px] w-[5.56px] h-[300px]">
                     <div class="mb-4">
                         <img
-                            src="/public/img/fueldao.svg"
+                            src="/public/img/app.svg"
                             alt="Logo"
                             class="w-full h-10"
                             style="max-width: 100%; height: auto;"
@@ -123,7 +123,7 @@ pub fn Footer() -> impl IntoView {
                     <nav class="flex flex-col justify-start items-start h-full ml-[50px]">
                         <div class="mb-4">
                             <img
-                                src="/public/img/fueldao.svg"
+                                src="/public/img/app.svg"
                                 alt="Logo"
                                 class="z-10 h-10"
                                 style="max-width: 100%; height: auto;"

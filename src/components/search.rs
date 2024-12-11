@@ -50,7 +50,7 @@ pub fn Search() -> impl IntoView {
         >
             <div class="absolute inset-0 justify-center p-4 pl-12 bg-black opacity-50">
                 <img
-                    src="/public/img/fueldao.svg"
+                    src="/public/img/app.svg"
                     alt="Logo"
                     class="flex justify-between items-center h-8 sm:h-4 md:h-6 lg:h-8 opacity-1"
                 />
